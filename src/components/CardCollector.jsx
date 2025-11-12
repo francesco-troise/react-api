@@ -1,3 +1,5 @@
+import Card from "./Card";
+
 //Import di Axios
 import axios from "axios";
 
@@ -10,6 +12,15 @@ export default function CardCollector() {
   const [actress, setAttrici] = useState([]);
   const [actors, setActors] = useState([]);
 
+  const [fullActors, setFullActors] = useState([]);
+  //state combinato (actress + actors)
+
+  useEffect(() => setFullActors([...actress, ...actors]), [actress, actors]);
+  /*
+    Mantiene sincronizzato lo stato combinato con eventuali varizioni degli stati interni
+    Utilizzo dello spread operator per l'immutabilità degli state
+  */
+
   //funzione che gestisce la chiamata api per "actress"
   function CallActress() {
     axios
@@ -17,7 +28,7 @@ export default function CardCollector() {
       .then((res) => setAttrici(res.data));
   }
 
-  //funzione che gestisce la chiamata api per "actrors"
+  //funzione che gestisce la chiamata api per "actors"
   function CallActors() {
     axios
       .get(" https://lanciweb.github.io/demo/api/actors/")
@@ -42,5 +53,11 @@ export default function CardCollector() {
     }
   }, [actress, actors]);
 
-  return;
+  return (
+    <div>
+      {fullActors.map((act, index) => (
+        <Card key={index} actor={act} />
+      ))}
+    </div>
+  );
 }

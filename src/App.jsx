@@ -3,7 +3,7 @@ import CardCollector from "./components/CardCollector";
 function App() {
   return (
     <>
-      <CardCollector />
+      <CardCollector bho={10} />
     </>
   );
 }
