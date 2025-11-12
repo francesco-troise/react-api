@@ -1,5 +1,11 @@
+import CardCollector from "./components/CardCollector";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <CardCollector />
+    </>
+  );
 }
 
 export default App;
